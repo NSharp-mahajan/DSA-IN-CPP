@@ -17,3 +17,6 @@ Each folder represents a DSA topic. Inside each, you’ll find C++ files with:
 Made with 💙 by Natansh Mahajan
 📧 Open to collaboration, contributions, or discussions!
 email : mahajannatansh@gmail.com
+
+![Problems Solved](https://img.shields.io/badge/Problems_Solved-4-blue)
+![Language](https://img.shields.io/badge/Language-C++-orange)

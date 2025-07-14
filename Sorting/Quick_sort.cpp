@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Partition function
 int partition(vector<int> &arr, int low, int high) {
     int pivot = arr[low];
     int i = low;

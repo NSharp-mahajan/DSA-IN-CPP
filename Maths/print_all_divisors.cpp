@@ -1,7 +1,7 @@
 // 📌 Problem: Print All Divisors of a Number
 // 🔸 Given an integer `n`, return all its positive divisors in sorted order.
 
-
+ 
 // ⏱ Time Complexity: O(√n)
 // 📦 Space Complexity: O(k), where k is the number of divisors
 

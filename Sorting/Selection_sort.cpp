@@ -1,19 +1,19 @@
-// Problem Name  =  Selection Sort 
-
-#include <iostream>
+#include<iostream>
+#include<vector>
 using namespace std;
 
-void selection_sort(int arr[], int n){
-    for(int i = 0; i <= n - 2; i++){
-        int min = i;
+void selection_sort(vector<int>& arr){
+    int n = arr.size();
+    for(int i = 0; i < n - 1; i++){
+        int minIndex = i;
         for(int j = i + 1; j < n; j++){
-            if(arr[j] < arr[min]){
-                min = j;
+            if(arr[j] < arr[minIndex]){
+                minIndex = j;
             }
         }
-        int temp = arr[min];
-        arr[min] = arr[i];
-        arr[i] = temp;
+        if(minIndex != i){
+            swap(arr[i], arr[minIndex]);
+        }
     }
 }
 
@@ -21,14 +21,17 @@ int main(){
     int n;
     cout << "Enter number of elements: ";
     cin >> n;
-    int arr[n];
+
+    vector<int> arr(n);
     cout << "Enter " << n << " elements: ";
     for(int i = 0; i < n; i++)
         cin >> arr[i];
-    selection_sort(arr, n);
+
+    selection_sort(arr);
+
     cout << "Sorted array: ";
-    for(int i = 0; i < n; i++){
-        cout << arr[i] << " ";
+    for(int val : arr){
+        cout << val << " ";
     }
 
     return 0;

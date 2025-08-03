@@ -1,18 +1,18 @@
-// Insertion Sort
-
+// Online C++ compiler to run C++ program online
 #include <iostream>
+#include <vector>
 using namespace std;
 
 void Insertion_sort(int arr[], int n){
-   for(int i = 0; i <= n - 1; i++){
-    int j = i;
-    while(j > 0 && arr[j - 1] > arr[j]){
-        int temp = arr[j - 1];
-        arr[j - 1] = arr[j];
-        arr[j] = temp;
-        j--;
+    for(int i = 0; i < n ; i++){
+        int key = arr[i];
+        int j = i - 1;
+        while(j >= 0 && arr[j] > key){
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
     }
-   }
 }
 
 int main(){
@@ -28,6 +28,5 @@ int main(){
     for(int i = 0; i < n; i++){
         cout << arr[i] << " ";
     }
-
     return 0;
 }

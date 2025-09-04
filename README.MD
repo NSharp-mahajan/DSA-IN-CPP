@@ -1,5 +1,5 @@
 ![Problems Solved](https://img.shields.io/badge/Problems_Solved-43-blue)
- ![Language](https://img.shields.io/badge/Language-C++-orange)
+![Language](https://img.shields.io/badge/Language-C++-orange)
 
 
 # 🚀 DSA in C++ – My Problem Solving Journey

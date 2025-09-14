@@ -4,7 +4,7 @@ Queue follows FIFO (First in First Out)*/
 
 // Stack Using Arrays 
 
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 
 class Stack {
@@ -57,7 +57,7 @@ int main() {
     cout << "Size: " << st.size() << endl; 
 
     return 0;
-}*/
+}
 
 // Queue using arrays
 

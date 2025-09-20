@@ -1,4 +1,4 @@
-![Problems Solved](https://img.shields.io/badge/Problems_Solved-48-blue)
+![Problems Solved](https://img.shields.io/badge/Problems_Solved-49-blue)
 ![Language](https://img.shields.io/badge/Language-C++-orange)
 
 

@@ -209,7 +209,7 @@ int main() {
 // ----------------- Doubly linked list -------------------- // 
 // Insert at head, tail, Insert at any position, Delete a node(by position), print Forward, print reverse, Length of DLL
 
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 
 
@@ -359,5 +359,118 @@ int main() {
     cout << "After deletion (Forward): ";
     printForward(head);
     cout << "Length: " << getLength(head) << endl;
+    return 0;
+}
+*/
+
+
+// -------------- Circular linked list ---------------//
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int d) {
+        this->data = d;
+        this->next = NULL;
+    }
+
+    ~Node() {
+        int value = this->data;
+        if (this->next != NULL) {
+            delete next;
+            this->next = NULL;
+        }
+        cout << "Memory freed for node with data " << value << endl;
+    }
+};
+
+// Traversal
+void print(Node* tail) {
+    Node* temp = tail;
+    if (tail == NULL) {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    do {
+        cout << tail->data << " ";
+        tail = tail->next;
+    } while (tail != temp);
+    cout << endl;
+}
+
+// Insert After a Given Value
+void insertNode(Node*& tail, int element, int d) {
+    if (tail == NULL) {
+        Node* temp = new Node(d);
+        tail = temp;
+        temp->next = temp;
+        return;
+    }
+
+    Node* curr = tail;
+    while (curr->data != element) {
+        curr = curr->next;
+        if (curr == tail) return; // element not found
+    }
+
+    Node* temp = new Node(d);
+    temp->next = curr->next;
+    curr->next = temp;
+
+    if (curr == tail)
+        tail = temp;
+}
+
+// Delete Node by Value
+void deleteNode(Node*& tail, int value) {
+    if (tail == NULL) {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    Node* prev = tail;
+    Node* curr = prev->next;
+
+    while (curr->data != value) {
+        prev = curr;
+        curr = curr->next;
+        if (curr == tail->next) {
+            cout << "Node not found!" << endl;
+            return;
+        }
+    }
+
+    prev->next = curr->next;
+
+    if (curr == prev) {
+        tail = NULL; // single node case
+    } else if (curr == tail) {
+        tail = prev;
+    }
+
+    curr->next = NULL;
+    delete curr;
+}
+
+int main() {
+    Node* tail = NULL;
+
+    insertNode(tail, 5, 3); // list empty → creates first node
+    insertNode(tail, 3, 5);
+    insertNode(tail, 5, 7);
+    insertNode(tail, 7, 9);
+
+    cout << "Circular Linked List: ";
+    print(tail);
+
+    deleteNode(tail, 5);
+    cout << "After deletion: ";
+    print(tail);
+
     return 0;
 }

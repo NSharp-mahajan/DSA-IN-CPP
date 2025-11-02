@@ -1,5 +1,5 @@
-#include<iostream>
-using namespace std;
+// #include<iostream>
+// using namespace std;
 
 // Implementation of a node
 
@@ -75,7 +75,7 @@ int main(){
 
 // -------------------Deletion--------------------------
 
-#include <bits/stdc++.h>
+/*#include <bits/stdc++.h>
 using namespace std;
 
 struct Node {
@@ -202,5 +202,162 @@ int main() {
     ll.reverseLinkedList();
     ll.print(); 
 
+    return 0;
+}*/
+
+
+// ----------------- Doubly linked list -------------------- // 
+// Insert at head, tail, Insert at any position, Delete a node(by position), print Forward, print reverse, Length of DLL
+
+#include <iostream>
+using namespace std;
+
+
+class Node {
+public:
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int d) {
+        this->data = d;
+        this->prev = NULL;
+        this->next = NULL;
+    }
+
+    ~Node() {
+        int value = this->data;
+        if (next != NULL) {
+            delete next;
+            next = NULL;
+        }
+        cout << "Memory freed for node with data " << value << endl;
+    }
+};
+void printForward(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+void printBackward(Node* tail) {
+    Node* temp = tail;
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->prev;
+    }
+    cout << endl;
+}
+int getLength(Node* head) {
+    int len = 0;
+    Node* temp = head;
+    while (temp != NULL) {
+        len++;
+        temp = temp->next;
+    }
+    return len;
+}
+
+void insertAtHead(Node*& head, Node*& tail, int d) {
+    Node* temp = new Node(d);
+    if (head == NULL) {
+        head = temp;
+        tail = temp;
+    } else {
+        temp->next = head;
+        head->prev = temp;
+        head = temp;
+    }
+}
+void insertAtTail(Node*& head, Node*& tail, int d) {
+    Node* temp = new Node(d);
+    if (tail == NULL) {
+        head = temp;
+        tail = temp;
+    } else {
+        tail->next = temp;
+        temp->prev = tail;
+        tail = temp;
+    }
+}
+
+void insertAtPosition(Node*& head, Node*& tail, int pos, int d) {
+    if (pos == 1) {
+        insertAtHead(head, tail, d);
+        return;
+    }
+    Node* temp = head;
+    int cnt = 1;
+    while (cnt < pos - 1 && temp->next != NULL) {
+        temp = temp->next;
+        cnt++;
+    }
+
+    if (temp->next == NULL) {
+        insertAtTail(head, tail, d);
+        return;
+    }
+    Node* nodeToInsert = new Node(d);
+    nodeToInsert->next = temp->next;
+    temp->next->prev = nodeToInsert;
+    temp->next = nodeToInsert;
+    nodeToInsert->prev = temp;
+}
+
+// Delete Node by Position
+void deleteNode(Node*& head, Node*& tail, int pos) {
+    if (head == NULL)
+        return;
+    if (pos == 1) {
+        Node* temp = head;
+        head = head->next;
+        if (head != NULL)
+            head->prev = NULL;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+
+    Node* curr = head;
+    Node* prev = NULL;
+    int cnt = 1;
+    while (cnt < pos && curr != NULL) {
+        prev = curr;
+        curr = curr->next;
+        cnt++;
+    }
+    if (curr == NULL)
+        return;
+
+    if (curr->next == NULL)
+        tail = prev;
+    prev->next = curr->next;
+    if (curr->next != NULL)
+        curr->next->prev = prev;
+    curr->next = NULL;
+    curr->prev = NULL;
+    delete curr;
+}
+
+int main() {
+    Node* head = NULL;
+    Node* tail = NULL;
+
+    insertAtHead(head, tail, 10);
+    insertAtHead(head, tail, 20);
+    insertAtTail(head, tail, 30);
+    insertAtTail(head, tail, 40);
+    insertAtPosition(head, tail, 3, 25);
+
+    cout << "DLL (Forward): ";
+    printForward(head);
+    cout << "DLL (Backward): ";
+    printBackward(tail);
+    deleteNode(head, tail, 3);
+    cout << "After deletion (Forward): ";
+    printForward(head);
+    cout << "Length: " << getLength(head) << endl;
     return 0;
 }

@@ -244,3 +244,58 @@ int main(){
     
     return 0;
 }*/
+
+// Infix to postfix 
+
+#include <iostream>
+#include <stack>
+#include <cctype>
+using namespace std;
+
+int precedence(char op){
+    if(op == '^') return 3;
+    if(op == '*' || op == '/' || op == '%') return 2;
+    if(op == '+' || op == '-') return 1;
+    return 0;
+}
+
+string infix_to_postfix(string s){
+    stack<char> st;
+    string out = "";
+
+    for(char ch : s){
+        if(isalnum(ch)){
+            out += ch;
+        }
+        else if(ch == '('){
+            st.push(ch);
+        }
+        else if(ch == ')'){
+            while(!st.empty() && st.top() != '('){
+                out += st.top();
+                st.pop();
+            }
+            st.pop(); 
+        }
+        else {
+            while(!st.empty() && st.top() != '(' &&
+                  precedence(st.top()) >= precedence(ch)) 
+            {
+                out += st.top();
+                st.pop();
+            }
+            st.push(ch);
+        }
+    }
+    while(!st.empty()){
+        out += st.top();
+        st.pop();
+    }
+
+    return out;
+}
+int main() {
+    string exp = "(A+B)*C";
+    cout << "Postfix: " << infix_to_postfix(exp) << endl;
+    return 0;
+}

@@ -247,7 +247,7 @@ int main(){
 
 // Infix to postfix 
 
-#include <iostream>
+/*#include <iostream>
 #include <stack>
 #include <cctype>
 using namespace std;
@@ -298,4 +298,5 @@ int main() {
     string exp = "(A+B)*C";
     cout << "Postfix: " << infix_to_postfix(exp) << endl;
     return 0;
-}
+}*/
+

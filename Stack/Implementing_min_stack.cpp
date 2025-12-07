@@ -1,54 +1,37 @@
 #include <iostream>
-#include<stack>
+#include <stack>
 using namespace std;
 
 class MinStack {
-private:
-    stack<long long> st;
-    long long mini;
-
 public:
-    MinStack() {
-        while (!st.empty()) st.pop();
-        mini = INT_MAX;
-    }
+    stack<int> st;
+    stack<int> minst;
+
+    MinStack() {}
 
     void push(int val) {
-        long long value = val;
-        if (st.empty()) {
-            mini = val;
-            st.push(value);
-        } else {
-            if (value < mini) {
-                st.push(2LL * value - mini); 
-                mini = value;
-            } else {
-                st.push(value);
-            }
+        st.push(val);
+        if (minst.empty() || val <= minst.top()) {
+            minst.push(val);
         }
     }
 
     void pop() {
         if (st.empty()) return;
-        long long topVal = st.top();
-        st.pop();
-        if (topVal < mini) {
-            mini = 2LL * mini - topVal; 
+
+        if (st.top() == minst.top()) {
+            minst.pop();
         }
+
+        st.pop();
     }
 
     int top() {
-        if (st.empty()) return -1;
-        long long topVal = st.top();
-        if (topVal < mini) {
-            return (int)mini;
-        }
-        return (int)topVal;
+        return st.top();
     }
 
     int getMin() {
-        if (st.empty()) return -1;
-        return (int)mini;
+        return minst.top();
     }
 };
 
@@ -59,12 +42,7 @@ int main() {
     ms.push(7);
     ms.push(2);
 
-    cout << "Current Min: " << ms.getMin() << endl;
+    cout << "Min: " << ms.getMin() << endl;  
     ms.pop();
-    cout << "Current Min: " << ms.getMin() << endl; 
-    ms.pop();
-    cout << "Top: " << ms.top() << endl;            
-    cout << "Current Min: " << ms.getMin() << endl; 
-
-    return 0;
+    cout << "Min: " << ms.getMin() << endl;  
 }

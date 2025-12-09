@@ -191,3 +191,116 @@ int main() {
 
     return 0;
 }*/
+
+// Implementing using LinkedList
+
+#include <iostream>
+using namespace std;  
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data) {
+        this->data = data;
+        this->next = nullptr;  
+    }
+};
+
+class LinkedListQueue {
+private:
+    Node* front;
+    Node* rear;
+    int size;
+
+public:
+    LinkedListQueue() : front(nullptr), rear(nullptr), size(0) {}
+
+    bool isEmpty() {
+        return front == nullptr;
+    }
+
+    void enqueue(int item) {
+        Node* newNode = new Node(item);
+        if (front == nullptr) {
+            front = rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+        }
+        size++;
+        cout << "Enqueued: " << item << endl;
+    }
+
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is Empty!\n";
+            return -1;
+        }
+        Node* temp = front;
+        int val = temp->data;
+        front = front->next;
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+        delete temp;
+        size--;
+        cout << "Dequeued: " << val << endl;
+        return val;
+    }
+
+    int peekFront() {
+        if (isEmpty()) {
+            cout << "Queue is Empty!" << endl;
+            return -1;
+        }
+        return front->data;
+    }
+
+    int peekRear() {
+        if (isEmpty()) {
+            cout << "Queue is Empty!" << endl;
+            return -1;
+        }
+        return rear->data;
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is Empty!" << endl;
+            return;
+        }
+        cout << "Queue Elements: ";
+        Node* temp = front;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;  
+        }
+        cout << endl;  
+    }
+};
+
+int main() {
+    LinkedListQueue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.dequeue();
+    q.display();
+    q.enqueue(40);
+    q.enqueue(50);
+    q.display();
+    cout << "Front Element: " << q.peekFront() << endl;
+    cout << "Rear Element: " << q.peekRear() << endl;
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+
+    return 0;
+}

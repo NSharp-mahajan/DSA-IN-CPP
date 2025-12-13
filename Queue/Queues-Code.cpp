@@ -194,7 +194,7 @@ int main() {
 
 // Implementing using LinkedList
 
-#include <iostream>
+/*#include <iostream>
 using namespace std;  
 
 class Node {
@@ -301,6 +301,132 @@ int main() {
     q.dequeue();
     q.dequeue();
     q.dequeue();
+
+    return 0;
+}*/
+
+// Dequeue
+#include<iostream>
+#define MAX 5
+using namespace std;
+
+class CircularDequeue {
+    int front, rear, size;
+    int* arr;
+
+public:
+    CircularDequeue() {
+        front = 0;
+        rear = -1;
+        size = 0;
+        arr = new int[MAX];
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    bool isFull() {
+        return size == MAX;
+    }
+
+    void insertRear(int item) {
+        if (isFull()) {
+            cout << "Dequeue is Full!" << endl;
+            return;
+        }
+        rear = (rear + 1) % MAX;
+        arr[rear] = item;
+        size++;
+    }
+
+    void insertFront(int item) {
+        if (isFull()) {
+            cout << "Dequeue is Full!" << endl;
+            return;
+        }
+        front = (front - 1 + MAX) % MAX;
+        arr[front] = item;
+        size++;
+    }
+
+    int deleteFront() {
+        if (isEmpty()) {
+            cout << "Dequeue is Empty!" << endl;
+            return -1;
+        }
+        int val = arr[front];
+        front = (front + 1) % MAX;
+        size--;
+        cout << "Removed from Front: " << val << endl;
+        return val;
+    }
+
+    int deleteRear() {
+        if (isEmpty()) {
+            cout << "Dequeue is Empty!" << endl;
+            return -1;
+        }
+        int val = arr[rear];
+        rear = (rear - 1 + MAX) % MAX;
+        size--;
+        cout << "Removed from Rear: " << val << endl;
+        return val;
+    }
+
+    int peekFront() {
+        if (isEmpty()) {
+            cout << "Dequeue is Empty!" << endl;
+            return -1;
+        }
+        return arr[front];
+    }
+
+    int peekRear() {
+        if (isEmpty()) {
+            cout << "Dequeue is Empty!" << endl;
+            return -1;
+        }
+        return arr[rear];
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Dequeue is Empty!" << endl;
+            return;
+        }
+
+        cout << "Dequeue: ";
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % MAX;
+            cout << arr[index] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    CircularDequeue dq;
+
+    dq.insertRear(10);
+    dq.insertRear(20);
+    dq.insertRear(30);
+    dq.insertFront(7);
+    dq.insertFront(1);
+
+    dq.display();
+
+    dq.deleteFront();
+    dq.deleteRear();
+
+    dq.insertRear(40);
+    dq.insertFront(2);
+
+    dq.display();
 
     return 0;
 }

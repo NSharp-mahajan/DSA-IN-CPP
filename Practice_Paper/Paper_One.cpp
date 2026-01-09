@@ -352,17 +352,15 @@ string decodeMessage(string s) {
 
     for (char ch : s) {
         if (ch == ' ') {
-            // reverse the collected word
             reverse(word.begin(), word.end());
             result += word + " ";
-            word = ""; // reset for next word
+            word = ""; 
         }
         else {
             word += ch;
         }
     }
 
-    // reverse the last word
     reverse(word.begin(), word.end());
     result += word;
 
